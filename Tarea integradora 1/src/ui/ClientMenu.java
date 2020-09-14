@@ -2,11 +2,11 @@ package ui;
 
 import java.util.Scanner;
 
-public class ClienteMenu {
+public class ClientMenu {
 	
 	public final static int REGRESAR = 6;
 	private Scanner sc;
-	public ClienteMenu() {
+	public ClientMenu() {
 		sc = new Scanner(System.in);
 	}
 

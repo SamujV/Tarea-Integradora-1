@@ -2,11 +2,11 @@ package ui;
 
 import java.util.Scanner;
 
-public class ProductoMenu {
+public class OrderMenu {
 
-	public final static int REGRESAR = 4;
+	public final static int REGRESAR = 5;
 	private Scanner sc;
-	public ProductoMenu() {
+	public OrderMenu() {
 		sc = new Scanner(System.in);
 	}
 
@@ -24,15 +24,18 @@ public class ProductoMenu {
 
 		switch (option) {
 		case 1:
-			registrarProducto();
+			registrarPedido();
 			break;
 		case 2:
-			actualizarProducto();
+			actualizarPedido();
 			break;
 		case 3:
-			importarDatosProductos();
+			cambiarEstadoPedido();
 			break;
 		case 4:
+			importarDatosPedidos();
+			break;
+		case 5:
 			regresar();
 			break;
 		default: System.out.println("hacer excepcion");
@@ -45,24 +48,27 @@ public class ProductoMenu {
 
 
 
-	private void registrarProducto() {
+	private void registrarPedido() {
 
 	}
-	private void actualizarProducto() {
+	private void actualizarPedido() {
 
 	}
-	private void importarDatosProductos() {
+	private void cambiarEstadoPedido() {
 
 	}
-	
+	private void importarDatosPedidos() {
+
+	}	
 	private void showMenu() {
 
-		System.out.println("\nBIENVENIDO AL MODULO DE PRODUCTOS\n");
+		System.out.println("\nBIENVENIDO AL MODULO DE PEDIDOS\n");
 		System.out.println("Porfavor ingrese la opcion deseada");
-		System.out.println("1. Registrar producto.");
-		System.out.println("2. Actualizar producto.");
-		System.out.println("3. Importar datos de productos.");
-		System.out.println("4. Regresar.");
+		System.out.println("1. Registrar pedido.");
+		System.out.println("2. Actualizar pedido.");
+		System.out.println("3. Cambiar estado de un pedido.");
+		System.out.println("4. Importar datos de pedidos.");
+		System.out.println("5. Regresar.");
 
 
 	}

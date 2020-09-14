@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-	private RestauranteMenu resMenu;
-	private ClienteMenu cliMenu;
-	private ProductoMenu proMenu;
-	private PedidoMenu pedMenu;
+	private RestaurantMenu resMenu;
+	private ClientMenu cliMenu;
+	private ProductMenu proMenu;
+	private OrderMenu pedMenu;
 	public final static int SALIR = 6;
 	private Scanner sc;
 	
 	public MainMenu() {
-		resMenu = new RestauranteMenu();
-		cliMenu = new ClienteMenu();
-		proMenu = new ProductoMenu();
-		pedMenu = new PedidoMenu();
+		resMenu = new RestaurantMenu();
+		cliMenu = new ClientMenu();
+		proMenu = new ProductMenu();
+		pedMenu = new OrderMenu();
 		sc = new Scanner(System.in);
 	}
 	

@@ -2,15 +2,15 @@ package ui;
 
 import java.util.Scanner;
 
-public class PedidoMenu {
+public class RestaurantMenu {
 
 	public final static int REGRESAR = 5;
 	private Scanner sc;
-	public PedidoMenu() {
+	public RestaurantMenu() {
 		sc = new Scanner(System.in);
 	}
 
-	public void startProductoMenu() {
+	public void startRestauranteMenu() {
 		int  option;
 		do {
 			showMenu();
@@ -24,16 +24,16 @@ public class PedidoMenu {
 
 		switch (option) {
 		case 1:
-			registrarPedido();
+			registrarRestaurante();
 			break;
 		case 2:
-			actualizarPedido();
+			actualizarDatos();
 			break;
 		case 3:
-			cambiarEstadoPedido();
+			listarRestaurantes();
 			break;
 		case 4:
-			importarDatosPedidos();
+			importarDatos();
 			break;
 		case 5:
 			regresar();
@@ -48,26 +48,26 @@ public class PedidoMenu {
 
 
 
-	private void registrarPedido() {
+	private void registrarRestaurante() {
 
 	}
-	private void actualizarPedido() {
+	private void actualizarDatos() {
 
 	}
-	private void cambiarEstadoPedido() {
-
-	}
-	private void importarDatosPedidos() {
+	private void listarRestaurantes() {
 
 	}	
+	private void importarDatos() {
+
+	}
 	private void showMenu() {
 
-		System.out.println("\nBIENVENIDO AL MODULO DE PEDIDOS\n");
+		System.out.println("\nBIENVENIDO AL MODULO DE RESTAURANTES\n");
 		System.out.println("Porfavor ingrese la opcion deseada");
-		System.out.println("1. Registrar pedido.");
-		System.out.println("2. Actualizar pedido.");
-		System.out.println("3. Cambiar estado de un pedido.");
-		System.out.println("4. Importar datos de pedidos.");
+		System.out.println("1. Registrar restaurante.");
+		System.out.println("2. Actualizar datos de un restaurante.");
+		System.out.println("3. Listar restaurantes en pantalla.");
+		System.out.println("4. Importar datos de restaurantes.");
 		System.out.println("5. Regresar.");
 
 
