@@ -2,7 +2,7 @@ package model;
 
 public class Product {
 
-	private int code;
+	private String code;
 	private String name;
 	private String description;
 	private double cost;
@@ -10,7 +10,7 @@ public class Product {
 	
 
 	
-	public Product(int code, String name, String description, double cost, String nitRes) {
+	public Product(String code, String name, String description, double cost, String nitRes) {
 		this.code = code;
 		this.name = name;
 		this.description = description;

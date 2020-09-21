@@ -7,17 +7,33 @@ public class Restaurant {
 	private String namAdmin;
 	
 	
-	public Restaurant(String nombre, String nit, String nomAdmin) {
-		this.name = nombre;
+	public Restaurant(String name, String nit, String namA) {
+		this.name = name;
 		this.nit = nit;
-		this.namAdmin = nomAdmin;
+		this.namAdmin = namA;
 	}
 	
-	public void registerProduct(int cod, String nam, String des, double cost, String nitRes) {
-		
-		
+	public String getName() {
+		return name;
 	}
-	
+
+	public String getNit() {
+		return nit;
+	}
+
+	public String getNamAdmin() {
+		return namAdmin;
+	}
+
+	public void setName(String nam) {
+		name = nam;
+	}
+	public void setNit(String niT) {
+		nit = niT;
+	}
+	public void setNamAdmin(String nAdmin){
+		namAdmin = nAdmin;
+	}
 	
 
 }

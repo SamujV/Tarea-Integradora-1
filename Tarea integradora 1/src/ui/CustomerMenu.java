@@ -1,16 +1,13 @@
 package ui;
-
 import java.util.Scanner;
-
-public class ClientMenu {
-	
+public class CustomerMenu {
 	public final static int REGRESAR = 6;
 	private Scanner sc;
-	public ClientMenu() {
+	public CustomerMenu() {
 		sc = new Scanner(System.in);
 	}
 
-	public void startClienteMenu() {
+	public void startClienteMenu( ) {
 		int  option;
 		do {
 			showMenu();
@@ -52,7 +49,8 @@ public class ClientMenu {
 
 
 	private void registrarCliente() {
-
+		
+		
 	}
 	private void actualizarDatosCliente() {
 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MainMenu {
 
 	private RestaurantMenu resMenu;
-	private ClientMenu cliMenu;
+	private CustomerMenu cliMenu;
 	private ProductMenu proMenu;
 	private OrderMenu pedMenu;
 	public final static int SALIR = 6;
@@ -13,7 +13,7 @@ public class MainMenu {
 	
 	public MainMenu() {
 		resMenu = new RestaurantMenu();
-		cliMenu = new ClientMenu();
+		cliMenu = new CustomerMenu();
 		proMenu = new ProductMenu();
 		pedMenu = new OrderMenu();
 		sc = new Scanner(System.in);
@@ -51,7 +51,7 @@ public class MainMenu {
 		case 6:
 			goodBye();
 			break;
-			default: System.out.println("hacer excepcion ");	
+			default: System.out.println("Ingrese una opcion valida ");	
 			break;
 		}	
 	}
