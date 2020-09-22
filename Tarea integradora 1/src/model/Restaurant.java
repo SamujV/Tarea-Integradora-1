@@ -7,10 +7,10 @@ public class Restaurant {
 	private String namAdmin;
 	
 	
-	public Restaurant(String name, String nit, String namA) {
-		this.name = name;
-		this.nit = nit;
-		this.namAdmin = namA;
+	public Restaurant(String nam, String niT, String namA) {
+		name = nam;
+		nit = niT;
+		namAdmin = namA;
 	}
 	
 	public String getName() {
@@ -31,8 +31,8 @@ public class Restaurant {
 	public void setNit(String niT) {
 		nit = niT;
 	}
-	public void setNamAdmin(String nAdmin){
-		namAdmin = nAdmin;
+	public void setNamAdmin(String namA){
+		namAdmin = namA;
 	}
 	
 
