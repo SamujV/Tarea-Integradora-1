@@ -66,7 +66,7 @@ public class OrderSystemPrototype {
 		Restaurant r1 = restaurants.get(0);
 		while(start <= end && !found) {
 			int half = (start + end)/2;
-			 r1 = restaurants.get(half);
+			r1 = restaurants.get(half);
 			if(r1.getNit().equals(nit)) {
 				found = true;
 			}else if (r1.getNit().compareTo(nit)>0) {
@@ -90,7 +90,7 @@ public class OrderSystemPrototype {
 		Product p1 = products.get(0);
 		while(start <= end && !found) {
 			int half = (start + end)/2;
-			 p1 = products.get(half);
+			p1 = products.get(half);
 			if(p1.getCode().equals(code)) {
 				found = true;
 			}else if (p1.getCode().compareTo(code)>0) {
@@ -116,7 +116,7 @@ public class OrderSystemPrototype {
 		Customer c1 = customers.get(0);
 		while(start <= end && !found) {
 			int half = (start + end)/2;
-			 c1 = customers.get(half);
+			c1 = customers.get(half);
 			if(c1.getId().equals(id)) {
 				found = true;
 			}else if (c1.getId().compareTo(id)>0) {
@@ -132,29 +132,58 @@ public class OrderSystemPrototype {
 		c1.setAddress(address);	
 	}
 	//customers.size != 0
-		//id has to exist
-		//id2 has to be a new one
-		public void updateOrdData(String code, String idCust, String nitRest) { // NOT DONE YET
+	//code has to exist
+	public void updateOrdData(String code, String idCust, String nitRest) { // KIND OF DONE
 
-			boolean found = false;
-			int start = 0;
-			int end = orders.size()-1;
-			Order o1 = orders.get(0);
-			while(start <= end && !found) {
-				int half = (start + end)/2;
-				 o1 = orders.get(half);
-				if(o1.getCode().equals(code)) {
-					found = true;
-				}else if (o1.getCode().compareTo(code)>0) {
-					end = half - 1;
-				}else {
-					start = half + 1;
-				}			
-			}
-			
+		boolean found = false;
+		int start = 0;
+		int end = orders.size()-1;
+		Order o1 = orders.get(0);
+		while(start <= end && !found) {
+			int half = (start + end)/2;
+			o1 = orders.get(half);
+			if(o1.getCode().equals(code)) {
+				found = true;
+			}else if (o1.getCode().compareTo(code)>0) {
+				end = half - 1;
+			}else {
+				start = half + 1;
+			}			
 		}
+		o1.setIdCust(idCust);
+		o1.setNitRest(nitRest);
+	}
+	//code order has to exist
+	public void changeOrderStatus(String orderCode) {
+		Order o = getOrder(orderCode);
+		
+		if (o.getStatus() == OrderStatus.REQUESTED) {
+			o.setStatus(OrderStatus.IN_PROCESS);
+		}else if (o.getStatus() == OrderStatus.IN_PROCESS) {
+			o.setStatus(OrderStatus.SENT);
+		}else {
+			o.setStatus(OrderStatus.DELIVERED);
+		}		
+	}
 
-
+	public Order getOrder(String orderCode) {
+		Order o = orders.get(0);		
+		boolean found = false;
+		int start = 0;
+		int end = orders.size()-1;
+		while(start <= end && !found) {
+			int half = (start + end)/2;
+			o = orders.get(half);
+			if(o.getCode().equals(orderCode)) {
+				found = true;
+			}else if (o.getCode().compareTo(orderCode)>0) {
+				end = half - 1;
+			}else {
+				start = half + 1;
+			}			
+		}	
+		return o;		
+	}
 
 
 
@@ -164,15 +193,34 @@ public class OrderSystemPrototype {
 	public List<Customer> getCustomers(){
 		return customers;
 	}
+	public String customersToString() {
+		String toString = "";
+		for (Customer customer : customers) {
+			toString += "";
+		}
+		return toString;
+	}
+	
+	
 	public List<Order> getOrders(){
 		return orders;
-	}public List<Product> getProducts(){
+	}
+	
+	
+	
+	public List<Product> getProducts(){
 		return products;
 	}
 	public List<Restaurant> getRestaurants(){
 		return restaurants;
 	}
-
+	public String restaurantsToString() {
+		String toString = "";
+		for (Restaurant restaurant : restaurants) {
+			toString += "";
+		}
+		return toString;
+	}
 
 
 

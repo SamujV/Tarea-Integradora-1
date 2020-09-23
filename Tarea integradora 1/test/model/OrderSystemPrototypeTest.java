@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class OrderSystemPrototypeTest {
-	OrderSystemPrototype osp = new OrderSystemPrototype();
+	private OrderSystemPrototype osp = new OrderSystemPrototype();
+	private String code = "";
 
 	public void setupScenary1() {
 		osp.registerRestaurant("A", "12345", "alberto");
@@ -24,6 +25,14 @@ class OrderSystemPrototypeTest {
 		osp.registerCustomer("TI", "123456", "Marco Tulio Bolaños", "1213", "address");
 		osp.registerCustomer("CC", "1234567", "Alberto Henao Bolaños", "1223", "address");
 		osp.registerCustomer("CC", "12345678", "Lucia Gomez Albarado", "1323", "address");
+		
+	}
+	public void setupScenary4() {
+		osp.registerOrder("1", "1");
+		osp.registerOrder("12", "12");
+		osp.registerOrder("123", "123");
+		osp.registerOrder("1234", "1234");
+		code = osp.getOrders().get(2).getCode();
 		
 	}
 	@Test
@@ -64,6 +73,26 @@ class OrderSystemPrototypeTest {
 		assertEquals("address",osp.getCustomers().get(3).getAdress());
 	}
 	
+	@Test
+	void getOrderTest() {
+		setupScenary4();
+		assertEquals(code, osp.getOrder(code).getCode());	
+	}
+	
+	
+	@Test
+	void changeOrderStatusTest() {
+		setupScenary4();
+
+		assertEquals(OrderStatus.REQUESTED, osp.getOrder(code).getStatus());
+		osp.changeOrderStatus(code);
+		assertEquals(OrderStatus.IN_PROCESS, osp.getOrder(code).getStatus());
+		osp.changeOrderStatus(code);
+		assertEquals(OrderStatus.SENT, osp.getOrder(code).getStatus());
+		osp.changeOrderStatus(code);
+		assertEquals(OrderStatus.DELIVERED, osp.getOrder(code).getStatus());
+		
+	}
 	
 	
 	
