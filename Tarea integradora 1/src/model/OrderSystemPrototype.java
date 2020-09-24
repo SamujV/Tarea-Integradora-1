@@ -10,7 +10,7 @@ public class OrderSystemPrototype {
 	private List<Order> orders;
 	private List<Product> products;
 	private List<Restaurant> restaurants;
-
+	private String prueba = "";
 	public OrderSystemPrototype() {
 
 		customers = new ArrayList<>();
@@ -19,6 +19,12 @@ public class OrderSystemPrototype {
 		restaurants = new ArrayList<>();
 	}
 
+	public void setPrueba(String añadir) {
+		prueba += añadir + "\n";
+	}
+	public String getPrueba() {
+		return prueba;
+	}
 	public void registerRestaurant(String nam, String nit, String namA) {
 		Restaurant r = new Restaurant(nam, nit, namA);
 		if(restaurants.isEmpty()) {

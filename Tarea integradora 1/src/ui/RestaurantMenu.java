@@ -2,15 +2,18 @@ package ui;
 
 import java.util.Scanner;
 
-public class RestaurantMenu {
+import model.OrderSystemPrototype;
 
+public class RestaurantMenu {
+	private OrderSystemPrototype osp;
 	public final static int REGRESAR = 5;
 	private Scanner sc;
 	public RestaurantMenu() {
+		osp = null;
 		sc = new Scanner(System.in);
 	}
 
-	public void startRestauranteMenu() {
+	public void startRestaurantMenu() {
 		int  option;
 		do {
 			showMenu();
@@ -25,6 +28,7 @@ public class RestaurantMenu {
 		switch (option) {
 		case 1:
 			registrarRestaurante();
+			testearPrueba();
 			break;
 		case 2:
 			actualizarDatos();
@@ -44,10 +48,16 @@ public class RestaurantMenu {
 
 	}
 
+	public void testearPrueba() {
+		System.out.println("ingrese una linea");
+		String prueba = sc.nextLine();
+		osp.setPrueba(prueba);
+	
+	}
 
 
 
-
+	
 	private void registrarRestaurante() {
 
 	}
@@ -60,6 +70,15 @@ public class RestaurantMenu {
 	private void importarDatos() {
 
 	}
+	
+	public void setOrderSystem(OrderSystemPrototype os) {
+		osp = os;
+	}
+	
+	public OrderSystemPrototype getRestaurantOrderSystem() {
+		return osp;
+	}
+	
 	private void showMenu() {
 
 		System.out.println("\nBIENVENIDO AL MODULO DE RESTAURANTES\n");

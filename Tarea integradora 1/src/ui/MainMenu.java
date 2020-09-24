@@ -1,21 +1,23 @@
 package ui;
-
+import model.OrderSystemPrototype;
 import java.util.Scanner;
 
 public class MainMenu {
 
+	private OrderSystemPrototype osp;
 	private RestaurantMenu resMenu;
-	private CustomerMenu cliMenu;
+	private CustomerMenu custMenu;
 	private ProductMenu proMenu;
-	private OrderMenu pedMenu;
+	private OrderMenu ordMenu;
 	public final static int SALIR = 6;
 	private Scanner sc;
 	
 	public MainMenu() {
+		osp = new OrderSystemPrototype();
 		resMenu = new RestaurantMenu();
-		cliMenu = new CustomerMenu();
+		custMenu = new CustomerMenu();
 		proMenu = new ProductMenu();
-		pedMenu = new OrderMenu();
+		ordMenu = new OrderMenu();
 		sc = new Scanner(System.in);
 	}
 	
@@ -34,22 +36,32 @@ public class MainMenu {
 		switch(option) {
 		
 		case 1:
-			resMenu.startRestauranteMenu();
+			resMenu.setOrderSystem(osp);
+			resMenu.startRestaurantMenu();
+			osp = resMenu.getRestaurantOrderSystem();
 			break;
 		case 2:
-			cliMenu.startClienteMenu();
+			custMenu.setOrderSystem(osp);
+			custMenu.startCustomerMenu();
+			osp = custMenu.getCustomerOrderSystem();
+
 			break;
 		case 3:
-			proMenu.startProductoMenu();
+			proMenu.setOrderSystem(osp);
+			proMenu.startProductMenu();
+			osp = proMenu.getProductOrderSystem();
+			
 			break;
 		case 4:
-			pedMenu.startProductoMenu();
+			ordMenu.setOrderSystem(osp);
+			ordMenu.startOrderMenu();
 			break;
 		case 5:
 			exportarInfo();
 			break;
 		case 6:
 			goodBye();
+			System.out.println(osp.getPrueba());
 			break;
 			default: System.out.println("Ingrese una opcion valida ");	
 			break;
@@ -58,6 +70,10 @@ public class MainMenu {
 	
 	public void exportarInfo() {
 		
+	}
+	
+	public OrderSystemPrototype getOrderSystem() {
+		return osp;
 	}
 	private void showMenu() {
 		

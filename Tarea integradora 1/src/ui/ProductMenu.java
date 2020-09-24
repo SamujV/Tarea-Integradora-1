@@ -2,15 +2,17 @@ package ui;
 
 import java.util.Scanner;
 
-public class ProductMenu {
+import model.OrderSystemPrototype;
 
+public class ProductMenu {
+	private OrderSystemPrototype osp;
 	public final static int REGRESAR = 4;
 	private Scanner sc;
 	public ProductMenu() {
 		sc = new Scanner(System.in);
 	}
 
-	public void startProductoMenu() {
+	public void startProductMenu() {
 		int  option;
 		do {
 			showMenu();
@@ -25,6 +27,7 @@ public class ProductMenu {
 		switch (option) {
 		case 1:
 			registrarProducto();
+			testearPrueba();
 			break;
 		case 2:
 			actualizarProducto();
@@ -41,7 +44,12 @@ public class ProductMenu {
 
 	}
 
-
+	private void testearPrueba() {
+		System.out.println("ingrese una linea");
+		String prueba = sc.nextLine();
+		osp.setPrueba(prueba);
+	
+	}
 
 
 
@@ -54,7 +62,14 @@ public class ProductMenu {
 	private void importarDatosProductos() {
 
 	}
+	public void setOrderSystem(OrderSystemPrototype os) {
+		osp = os;
+	}
 	
+	public OrderSystemPrototype getProductOrderSystem() {
+		return osp;
+	}
+
 	private void showMenu() {
 
 		System.out.println("\nBIENVENIDO AL MODULO DE PRODUCTOS\n");

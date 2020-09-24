@@ -1,13 +1,16 @@
 package ui;
 import java.util.Scanner;
+import model.OrderSystemPrototype;
+
 public class CustomerMenu {
+	private OrderSystemPrototype osp;
 	public final static int REGRESAR = 6;
 	private Scanner sc;
 	public CustomerMenu() {
 		sc = new Scanner(System.in);
 	}
 
-	public void startClienteMenu( ) {
+	public void startCustomerMenu( ) {
 		int  option;
 		do {
 			showMenu();
@@ -22,6 +25,7 @@ public class CustomerMenu {
 		switch (option) {
 		case 1:
 			registrarCliente();
+			testearPrueba();
 			break;
 		case 2:
 			actualizarDatosCliente();
@@ -44,9 +48,13 @@ public class CustomerMenu {
 
 	}
 
-
-
-
+	private void testearPrueba() {
+		System.out.println("ingrese una linea");
+		String prueba = sc.nextLine();
+		osp.setPrueba(prueba);
+	
+	}
+	
 
 	private void registrarCliente() {
 		
@@ -63,6 +71,13 @@ public class CustomerMenu {
 	}
 	private void importarDatosCliente() {
 
+	}
+	public void setOrderSystem(OrderSystemPrototype os) {
+		osp = os;
+	}
+	
+	public OrderSystemPrototype getCustomerOrderSystem() {
+		return osp;
 	}
 	private void showMenu() {
 
