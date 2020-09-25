@@ -10,10 +10,6 @@ public class Customer implements Comparable<Customer>{
 	private String name;
 	private String surnames;
 
-
-
-
-
 	public Customer(String typeId, String id, String fullNam, String phone, String address) {
 		this.typeId = typeId;
 		this.id = id;

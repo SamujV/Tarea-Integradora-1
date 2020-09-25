@@ -1,6 +1,9 @@
 package ui;
 import model.OrderSystemPrototype;
+
 import java.util.Scanner;
+
+import exceptions.WrongOptionException;
 
 public class MainMenu {
 
@@ -9,7 +12,7 @@ public class MainMenu {
 	private CustomerMenu custMenu;
 	private ProductMenu proMenu;
 	private OrderMenu ordMenu;
-	public final static int SALIR = 6;
+	public final static int EXIT = 6;
 	private Scanner sc;
 
 	public MainMenu() {
@@ -23,50 +26,56 @@ public class MainMenu {
 
 	public void startMainMenu() {
 		int option;
-		do {
-			showMenu();
-			option = Integer.parseInt(sc.nextLine());
-			manageOptions(option);			
-		}while(option != SALIR);	
+		try {
+			do {
+				showMenu();
+				option = Integer.parseInt(sc.nextLine());
+				manageOptions(option);			
+			}while(option != EXIT);	
+		}catch (NumberFormatException nfe ) {
+			System.out.println("\nPlease insert a valid format");
+			 startMainMenu();
+		}
 	}
 
 
-
 	private void manageOptions(int option) {
-		switch(option) {
+		try {
+			switch(option) {
+			case 1:
+				resMenu.setOrderSystem(osp);
+				resMenu.startRestaurantMenu();
+				osp = resMenu.getRestaurantOrderSystem();
+				break;
+			case 2:
+				custMenu.setOrderSystem(osp);
+				custMenu.startCustomerMenu();
+				osp = custMenu.getCustomerOrderSystem();
 
-		case 1:
-			resMenu.setOrderSystem(osp);
-			resMenu.startRestaurantMenu();
-			osp = resMenu.getRestaurantOrderSystem();
-			break;
-		case 2:
-			custMenu.setOrderSystem(osp);
-			custMenu.startCustomerMenu();
-			osp = custMenu.getCustomerOrderSystem();
+				break;
+			case 3:
+				proMenu.setOrderSystem(osp);
+				proMenu.startProductMenu();
+				osp = proMenu.getProductOrderSystem();
 
-			break;
-		case 3:
-			proMenu.setOrderSystem(osp);
-			proMenu.startProductMenu();
-			osp = proMenu.getProductOrderSystem();
-
-			break;
-		case 4:
-			ordMenu.setOrderSystem(osp);
-			ordMenu.startOrderMenu();
-			osp = ordMenu.getOrderOrderSystem();
-			break;
-		case 5:
-			exportarInfo();
-			break;
-		case 6:
-			goodBye();
-			System.out.println(osp.getPrueba());
-			break;
-		default: System.out.println("Ingrese una opcion valida ");	
-		break;
-		}	
+				break;
+			case 4:
+				ordMenu.setOrderSystem(osp);
+				ordMenu.startOrderMenu();
+				osp = ordMenu.getOrderOrderSystem();
+				break;
+			case 5:
+				exportarInfo();
+				break;
+			case 6:
+				goodBye();
+				System.out.println(osp.getPrueba());
+				break;
+			default: throw new WrongOptionException();
+			}	
+		}catch (WrongOptionException wop) {
+			System.out.println(wop.getMessage());
+		}
 	}
 
 	public void exportarInfo() {

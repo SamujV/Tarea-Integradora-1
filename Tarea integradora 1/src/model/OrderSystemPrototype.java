@@ -7,6 +7,9 @@ import java.util.ArrayList;
 //import java.util.Comparator;
 import java.util.List;
 
+import exceptions.SameNameException;
+import exceptions.SameNitException;
+
 public class OrderSystemPrototype {
 
 	private List<Customer> customers;
@@ -198,7 +201,7 @@ public class OrderSystemPrototype {
 
 
 
-	public boolean existingRestaurantName(String rName) {
+	public boolean existingRestaurantName(String rName)  {
 		boolean exist = false;		
 		if (restaurants.size() > 0) {
 			for (Restaurant r : restaurants) {				
@@ -209,7 +212,7 @@ public class OrderSystemPrototype {
 		}		
 		return exist;
 	}
-	public boolean existingRestaurantNit(String rNit) {
+	public boolean existingRestaurantNit(String rNit)  {
 		boolean exist = false;		
 		if (restaurants.size() > 0) {
 			for (Restaurant r : restaurants) {				
@@ -220,28 +223,40 @@ public class OrderSystemPrototype {
 		}		
 		return exist;
 	}
-
-	public String restaurantsToString() {
-		String list = "	Restaurants 	";
-		list += "\nName:	Nit:	Admin: \n";		
-		for (Restaurant res : restaurants) {
-			list +=  res.getName() + ", " + res.getNit() + ", "+res.getNamAdmin()+"\n";
+	
+	public boolean existingCustomerId(String id) {
+		boolean exist = false;		
+		if (customers.size() > 0) {
+			for (Customer c : customers) {				
+				if (c.getId().equals(id)) {
+					exist = true;
+				}				
+			}
 		}		
-		return list;
+		return exist;
 	}
 
+	public String restaurantsToString() {
+		String toString = "	Restaurants 	";
+		toString += "\nName:	Nit:	Admin: \n";		
+		for (Restaurant res : restaurants) {
+			toString +=  res.getName() + ", " + res.getNit() + ", "+res.getNamAdmin()+"\n";
+		}		
+		return toString;
+	}
+	public String customersToString() {
+		String toString = "	Customers 	";
+		toString += "\nName:	TypeId:		Id:		Phone:		Address:\n";		
+		for (Customer cus : customers) {
+			toString +=  cus.getFullName() + ", " + cus.getTypeId() + ", "+cus.getId()+", "+cus.getPhone()+", "+cus.getAdress()+"\n";
+		}		
+		return toString;
+	}
 
 	public List<Customer> getCustomers(){
 		return customers;
 	}
-	public String customersToString() {
-		String toString = "";
-		for (Customer customer : customers) {
-			toString += "";
-		}
-		return toString;
-	}
-
+	
 
 	public void importRestaurantsData(String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -251,8 +266,11 @@ public class OrderSystemPrototype {
 			String nam = parts[0];
 			String nit = parts[1];
 			String namA = parts[2];				
-			registerRestaurant(nam, nit, namA);
+			Restaurant r = new Restaurant(nam, nit, namA);
+			restaurants.add(r);
+			line = br.readLine();
 		}
+		System.out.println("exitoso");
 		br.close();
 	}
 
