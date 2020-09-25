@@ -1,18 +1,25 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Restaurant {
 	
+	private ArrayList<Product> products;
 	private String name;
 	private String nit;
 	private String namAdmin;
 	
 	
 	public Restaurant(String nam, String niT, String namA) {
+		products = new ArrayList<>();
 		name = nam;
 		nit = niT;
 		namAdmin = namA;
 	}
 	
+	public void addProduct(Product p) {
+		products.add(p);
+	}
 	public String getName() {
 		return name;
 	}

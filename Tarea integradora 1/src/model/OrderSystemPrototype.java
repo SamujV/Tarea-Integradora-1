@@ -1,5 +1,8 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 //import java.util.Comparator;
 import java.util.List;
@@ -49,13 +52,16 @@ public class OrderSystemPrototype {
 			customers.add(c);
 		}else {			
 			int i = 0;
-			while (i<customers.size() && c.compareToByNameAndSurnames(customers.get(i))<0) {
+			while (i<customers.size() && c.compareTo(customers.get(i))<0) {
 				i++;
 			}
 			customers.add(i, c);
 		}
 	}
 
+	//restaurants.size!=0
+	//customers.siz2 != 0
+	//show 
 	public void registerOrder(String idC, String nitRes) {
 		Order o = new Order(idC, nitRes);
 		orders.add(o);		
@@ -161,7 +167,7 @@ public class OrderSystemPrototype {
 	//code order has to exist
 	public void changeOrderStatus(String orderCode) {
 		Order o = getOrder(orderCode);
-		
+
 		if (o.getStatus() == OrderStatus.REQUESTED) {
 			o.setStatus(OrderStatus.IN_PROCESS);
 		}else if (o.getStatus() == OrderStatus.IN_PROCESS) {
@@ -192,7 +198,37 @@ public class OrderSystemPrototype {
 
 
 
+	public boolean existingRestaurantName(String rName) {
+		boolean exist = false;		
+		if (restaurants.size() > 0) {
+			for (Restaurant r : restaurants) {				
+				if (r.getName().equals(rName)) {
+					exist = true;
+				}				
+			}
+		}		
+		return exist;
+	}
+	public boolean existingRestaurantNit(String rNit) {
+		boolean exist = false;		
+		if (restaurants.size() > 0) {
+			for (Restaurant r : restaurants) {				
+				if (r.getNit().equals(rNit)) {
+					exist = true;
+				}				
+			}
+		}		
+		return exist;
+	}
 
+	public String restaurantsToString() {
+		String list = "	Restaurants 	";
+		list += "\nName:	Nit:	Admin: \n";		
+		for (Restaurant res : restaurants) {
+			list +=  res.getName() + ", " + res.getNit() + ", "+res.getNamAdmin()+"\n";
+		}		
+		return list;
+	}
 
 
 	public List<Customer> getCustomers(){
@@ -205,26 +241,33 @@ public class OrderSystemPrototype {
 		}
 		return toString;
 	}
-	
-	
+
+
+	public void importRestaurantsData(String fileName) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line != null) {
+			String[] parts = line.split(",");
+			String nam = parts[0];
+			String nit = parts[1];
+			String namA = parts[2];				
+			registerRestaurant(nam, nit, namA);
+		}
+		br.close();
+	}
+
+
 	public List<Order> getOrders(){
 		return orders;
 	}
-	
-	
-	
+
+
+
 	public List<Product> getProducts(){
 		return products;
 	}
 	public List<Restaurant> getRestaurants(){
 		return restaurants;
-	}
-	public String restaurantsToString() {
-		String toString = "";
-		for (Restaurant restaurant : restaurants) {
-			toString += "";
-		}
-		return toString;
 	}
 
 

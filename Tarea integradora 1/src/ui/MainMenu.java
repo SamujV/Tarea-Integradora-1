@@ -78,22 +78,22 @@ public class MainMenu {
 	}
 	private void showMenu() {
 
-		System.out.println("BIENVENIDO A LA ASOCIACION DE RESTAURANTES\n");
-		System.out.println("Porfavor ingrese la opcion deseada");
-		System.out.println("1. Ir al modulo Restaurante.");
-		System.out.println("2. Ir al modulo Cliente.");
-		System.out.println("3. Ir al modulo Producto.");
-		System.out.println("4. Ir al modulo Pedido.");
-		System.out.println("5. Exportar informacion.");
-		System.out.println("6. Salir.");
+		System.out.println("WELCOME TO THE RESTAURANT ASSOCIATION\n");
+		System.out.println("Please insert an option");
+		System.out.println("1. Go to the Restaurant module.");
+		System.out.println("2. Go to the Customer module.");
+		System.out.println("3. Go to the Product module.");
+		System.out.println("4. Go to the Order module.");
+		System.out.println("5. Export information.");
+		System.out.println("6. Exit.");
 
 
 	}
 
 
 	public void goodBye() {
-		System.out.println("\nMUCHAS GRACIAS POR USAR EL PROGRAMA");
-		System.out.println("           VUELVA PRONTO            ");
+		System.out.println("\n		THANKS FOR USING THE PROGRAM		");
+		System.out.println("           		COME BACK SOON            ");
 	}
 
 

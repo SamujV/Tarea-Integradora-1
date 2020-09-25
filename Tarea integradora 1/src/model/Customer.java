@@ -1,5 +1,6 @@
 package model;
 
+
 public class Customer implements Comparable<Customer>{
 	private String typeId;
 	private String id;
@@ -23,8 +24,8 @@ public class Customer implements Comparable<Customer>{
 	}	
 
 
-
-	public int compareToByNameAndSurnames(Customer c) {
+	@Override
+	public int compareTo(Customer c) {
 		int comp;		
 		comp = surnames.compareTo(c.getSurnames());
 		if (comp == 0) {
@@ -34,29 +35,6 @@ public class Customer implements Comparable<Customer>{
 	}
 
 
-
-
-
-
-
-
-
-	@Override
-	public int compareTo(Customer o) {
-		int comp = 0;
-		comp = name.compareTo(o.getName());
-		if(comp == 0) {
-			comp = surnames.compareTo(o.getSurnames());
-		}		
-		return comp;
-	}
-
-
-
-
-
-
-
 	//fullname has to have 3 strings separated by 2 spaces
 	private void splitFullName() {
 		String[] names = fullName.split(" ");
@@ -64,6 +42,9 @@ public class Customer implements Comparable<Customer>{
 		surnames = names[1]+ " "+ names[2];
 	}
 
+	/**
+	 * @return
+	 */
 	public String getTypeId() {
 		return typeId;
 	}
