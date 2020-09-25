@@ -41,7 +41,15 @@ public class Customer implements Comparable<Customer>{
 
 
 
-
+	@Override
+	public int compareTo(Customer o) {
+		int comp = 0;
+		comp = name.compareTo(o.getName());
+		if(comp == 0) {
+			comp = surnames.compareTo(o.getSurnames());
+		}		
+		return comp;
+	}
 
 
 
@@ -98,13 +106,5 @@ public class Customer implements Comparable<Customer>{
 		address = add;
 	}
 
-	@Override
-	public int compareTo(Customer o) {
-		int comp = 0;
-		comp = name.compareTo(o.getName());
-		if(comp == 0) {
-			comp = surnames.compareTo(o.getSurnames());
-		}		
-		return comp;
-	}
+
 }

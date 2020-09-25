@@ -27,20 +27,20 @@ public class RestaurantMenu {
 
 		switch (option) {
 		case 1:
-			registrarRestaurante();
+			registerRestaurant();
 			testearPrueba();
 			break;
 		case 2:
-			actualizarDatos();
+			updateData();
 			break;
 		case 3:
-			listarRestaurantes();
+			listRestaurants();
 			break;
 		case 4:
-			importarDatos();
+			importData();
 			break;
 		case 5:
-			regresar();
+			goBack();
 			break;
 		default: System.out.println("hacer excepcion");
 		break;
@@ -52,33 +52,50 @@ public class RestaurantMenu {
 		System.out.println("ingrese una linea");
 		String prueba = sc.nextLine();
 		osp.setPrueba(prueba);
-	
-	}
-
-
-
-	
-	private void registrarRestaurante() {
 
 	}
-	private void actualizarDatos() {
+
+
+
+
+	private void registerRestaurant () {
+		String nam, nit, namA;
+		System.out.println(" REGISTER RESTAURANT");
+		System.out.println("Plese insert the data.");
+		System.out.println("Restaurant's name");
+		nam = sc.nextLine();
+		System.out.println("Restaurant's nit");
+		nit = sc.nextLine();
+		System.out.println("Admin's name");
+		namA = sc.nextLine();
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
-	private void listarRestaurantes() {
+	private void updateData() {
+
+	}
+	private void listRestaurants() {
 
 	}	
-	private void importarDatos() {
+	private void importData() {
 
 	}
-	
+
 	public void setOrderSystem(OrderSystemPrototype os) {
 		osp = os;
 	}
-	
+
 	public OrderSystemPrototype getRestaurantOrderSystem() {
 		return osp;
 	}
-	
+
 	private void showMenu() {
 
 		System.out.println("\nBIENVENIDO AL MODULO DE RESTAURANTES\n");
@@ -92,7 +109,7 @@ public class RestaurantMenu {
 
 	}
 
-	private void regresar() {
+	private void goBack() {
 		System.out.println("ha regresado al menu principal\n");
 	}
 }

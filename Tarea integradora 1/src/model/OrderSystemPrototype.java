@@ -38,8 +38,8 @@ public class OrderSystemPrototype {
 		}		
 	}
 
-	public void registerProduct(String code, String name, String description, double cost, String nitRes) {
-		Product p = new Product(code, name, description, cost, nitRes);
+	public void registerProduct(String name, String description, double cost, String nitRes) {
+		Product p = new Product( name, description, cost, nitRes);
 		products.add(p);		
 	}
 
@@ -88,7 +88,7 @@ public class OrderSystemPrototype {
 	//products.size != 0
 	//code has to exist
 	//code2 has to be a new one
-	public void updateProdData(String code, String code2, String name, String description, double cost, String nitRes) {
+	public void updateProdData(String code, String name, String description, double cost, String nitRes) {
 
 		boolean found = false;
 		int start = 0;
@@ -109,7 +109,6 @@ public class OrderSystemPrototype {
 		p1.setDescription(description);
 		p1.setCost(cost);
 		p1.setNitRes(nitRes);
-		p1.setCode(code2);
 	}
 	//customers.size != 0
 	//id has to exist

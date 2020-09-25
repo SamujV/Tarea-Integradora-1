@@ -1,5 +1,7 @@
 package model;
 
+import java.util.UUID;
+
 public class Product {
 
 	private String code;
@@ -10,8 +12,8 @@ public class Product {
 	
 
 	
-	public Product(String code, String name, String description, double cost, String nitRes) {
-		this.code = code;
+	public Product(String name, String description, double cost, String nitRes) {
+		code = UUID.randomUUID().toString();
 		this.name = name;
 		this.description = description;
 		this.cost = cost;
