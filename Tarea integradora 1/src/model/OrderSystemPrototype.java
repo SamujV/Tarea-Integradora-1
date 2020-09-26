@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.util.Comparator;
 import java.util.List;
-
-import exceptions.SameNameException;
-import exceptions.SameNitException;
 
 public class OrderSystemPrototype {
 
@@ -16,7 +12,6 @@ public class OrderSystemPrototype {
 	private List<Order> orders;
 	private List<Product> products;
 	private List<Restaurant> restaurants;
-	private String prueba = "";
 	public OrderSystemPrototype() {
 
 		customers = new ArrayList<>();
@@ -25,12 +20,8 @@ public class OrderSystemPrototype {
 		restaurants = new ArrayList<>();
 	}
 
-	public void setPrueba(String añadir) {
-		prueba += añadir + "\n";
-	}
-	public String getPrueba() {
-		return prueba;
-	}
+
+
 	public void registerRestaurant(String nam, String nit, String namA) {
 		Restaurant r = new Restaurant(nam, nit, namA);
 		if(restaurants.isEmpty()) {
@@ -49,8 +40,8 @@ public class OrderSystemPrototype {
 		products.add(p);		
 	}
 
-	public void registerCustomer(String type, String id, String fullNam, String phone, String address) {
-		Customer c = new Customer(type, id, fullNam, phone, address);
+	public void registerCustomer(String typeId, String id, String fullNam, String phone, String address) {
+		Customer c = new Customer(typeId, id, fullNam, phone, address);
 		if(customers.isEmpty()) {
 			customers.add(c);
 		}else {			
@@ -69,6 +60,7 @@ public class OrderSystemPrototype {
 		Order o = new Order(idC, nitRes);
 		orders.add(o);		
 	}
+
 
 	//restaurants.size != 0
 	//nit has to exist
@@ -168,6 +160,83 @@ public class OrderSystemPrototype {
 		o1.setNitRest(nitRest);
 	}
 	//code order has to exist
+
+
+	//insertion
+	public void sortCustomersbyId() {
+
+		for(int i = 0; i<customers.size() -1; i++ ){
+			//int menor = array[i];
+			Customer cminor = customers.get(i);
+			int pos = i;
+			for(int j = i+1; j<customers.size(); j++){
+				if(customers.get(j).compareToId(cminor)<0){//array[j]<menor
+					cminor = customers.get(j);   //array[j];
+					pos = j;       
+				}
+			}
+			Customer temp = customers.get(i); // int temporal = array[i];
+			customers.set(i, cminor); //array[i] = menor;
+			customers.set(pos, temp); //array[pos] = temporal;
+		}
+	}
+	
+	//selection
+	public void sortCustomersBySurnamesAndNames() {
+		
+		for (int i = 1; i < customers.size(); i++) { 
+            //int temp = array[i]; 
+            Customer temp = customers.get(i);
+			int j = i - 1;
+            while (j >= 0 && customers.get(j).compareToBySurnamesAndName(temp)>0) {//array[j] > temp 
+               
+               customers.set(j+1, temp);// array[j + 1] = array[j]; 
+                j = j - 1; 
+            } 
+            customers.set(j+1, temp);//array[j + 1] = temp; 
+        }
+		
+		
+		
+		
+	}
+
+	//DONE
+	public Customer findCustomer(String id) {
+		Customer cust;
+		long time1 = System.currentTimeMillis();
+		boolean found = false;
+		int start = 0;
+		int end = customers.size()-1;
+		cust = customers.get(0);
+		while(start <= end && !found) {
+			int half = (start + end)/2;
+			cust = customers.get(half);
+			if(cust.getId().equals(id)) {
+				found = true;
+			}else if (cust.getId().compareTo(id)>0) {
+				end = half - 1;
+			}else {
+				start = half + 1;
+			}			
+		}		
+
+		long time2 = System.currentTimeMillis();
+		long time = time2 - time1;
+		cust.setTimeToFind(time);
+		return cust;
+	}
+
+	public String getCustomerInfo(Customer cus) {
+		String info = "";		
+		info += String.format("%s   ,%s   ,%s   ,%s   ,%s   ,\n", cus.getFullName(),cus.getTypeId(),cus.getId(),cus.getPhone(),cus.getAdress());
+		info += "ime it took to search:   " + cus.getTimeToFind()+"Milliseconds";
+		return info;
+	}
+
+
+
+
 	public void changeOrderStatus(String orderCode) {
 		Order o = getOrder(orderCode);
 
@@ -223,7 +292,7 @@ public class OrderSystemPrototype {
 		}		
 		return exist;
 	}
-	
+
 	public boolean existingCustomerId(String id) {
 		boolean exist = false;		
 		if (customers.size() > 0) {
@@ -235,28 +304,6 @@ public class OrderSystemPrototype {
 		}		
 		return exist;
 	}
-
-	public String restaurantsToString() {
-		String toString = "	Restaurants 	";
-		toString += "\nName:	Nit:	Admin: \n";		
-		for (Restaurant res : restaurants) {
-			toString +=  res.getName() + ", " + res.getNit() + ", "+res.getNamAdmin()+"\n";
-		}		
-		return toString;
-	}
-	public String customersToString() {
-		String toString = "	Customers 	";
-		toString += "\nName:	TypeId:		Id:		Phone:		Address:\n";		
-		for (Customer cus : customers) {
-			toString +=  cus.getFullName() + ", " + cus.getTypeId() + ", "+cus.getId()+", "+cus.getPhone()+", "+cus.getAdress()+"\n";
-		}		
-		return toString;
-	}
-
-	public List<Customer> getCustomers(){
-		return customers;
-	}
-	
 
 	public void importRestaurantsData(String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -270,53 +317,86 @@ public class OrderSystemPrototype {
 			restaurants.add(r);
 			line = br.readLine();
 		}
-		System.out.println("exitoso");
+		br.close();
+	}
+	public void importCustomersData(String fileName) throws IOException{ 
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line != null) {
+			String[] parts = line.split(",");
+			String typeId = parts[0];
+			String id = parts[1];
+			String fullNam = parts[2] + " default";
+			String phone = parts[3];
+			String address = parts[4];
+			Customer c = new Customer(typeId, id, fullNam, phone, address);
+			customers.add(c);
+			line = br.readLine();
+		}
+		br.close();
+	}
+	public void importProductsData(String fileName) throws IOException{ //EDITAR A PRODUCTS
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line != null) {
+			String[] parts = line.split(",");
+			String nam = parts[0];
+			String nit = parts[1];
+			String namA = parts[2];				
+			Restaurant r = new Restaurant(nam, nit, namA);
+			restaurants.add(r);
+			line = br.readLine();
+		}
+		br.close();
+	}
+	public void importOrdersData(String fileName) throws IOException{ //EDITAR A ORDER
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		while (line != null) {
+			String[] parts = line.split(",");
+			String nam = parts[0];
+			String nit = parts[1];
+			String namA = parts[2];				
+			Restaurant r = new Restaurant(nam, nit, namA);
+			restaurants.add(r);
+			line = br.readLine();
+		}
 		br.close();
 	}
 
+	public String restaurantsToString() {
+		String toString = "	Restaurants 	";
+		toString += "\nName:	Nit:	Admin: \n";		
+		for (Restaurant res : restaurants) {
+			toString +=  res.getName() + ", " + res.getNit() + ", "+res.getNamAdmin()+"\n";
+		}		
+		return toString;
+	}
 
-	public List<Order> getOrders(){
-		return orders;
+	public String customersToString() {
+		sortCustomersBySurnamesAndNames();
+		String toString = "	Customers 	";
+		toString += "\nName:				TypeId:	Id:			Phone:			Address:\n";		
+		for (Customer cus : customers) {
+			toString += String.format("%s   ,%s   ,%s   ,%s   ,%s   ,\n", cus.getFullName(),cus.getTypeId(),cus.getId(),cus.getPhone(),cus.getAdress());
+		}		
+		return toString;
 	}
 
 
 
+	public List<Customer> getCustomers(){
+		return customers;
+	}
+	public List<Order> getOrders(){
+		return orders;
+	}
 	public List<Product> getProducts(){
 		return products;
 	}
 	public List<Restaurant> getRestaurants(){
 		return restaurants;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

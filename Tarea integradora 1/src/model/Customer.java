@@ -9,6 +9,7 @@ public class Customer implements Comparable<Customer>{
 	private String address;
 	private String name;
 	private String surnames;
+	private long timeToFind;
 
 	public Customer(String typeId, String id, String fullNam, String phone, String address) {
 		this.typeId = typeId;
@@ -29,7 +30,19 @@ public class Customer implements Comparable<Customer>{
 		}		
 		return  comp;
 	}
-
+	public int compareToId(Customer c) {			
+		return  id.compareTo(c.getId());		
+	}
+	
+	public int compareToBySurnamesAndName(Customer c) {
+		int comp;		
+		comp = surnames.compareTo(c.getSurnames());
+		if (comp == 0) {
+			comp =name.compareTo(c.getName()); 
+		}		
+		return  comp;
+	}
+	
 
 	//fullname has to have 3 strings separated by 2 spaces
 	private void splitFullName() {
@@ -82,6 +95,10 @@ public class Customer implements Comparable<Customer>{
 	public void setAddress(String add) {
 		address = add;
 	}
-
-
+	public long getTimeToFind() {
+		return timeToFind;
+	}
+	public void setTimeToFind(long time) {
+		timeToFind = time;
+	}
 }

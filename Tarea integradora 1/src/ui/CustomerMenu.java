@@ -2,8 +2,6 @@ package ui;
 import java.util.Scanner;
 
 import exceptions.SameIdException;
-import exceptions.SameNameException;
-import exceptions.SameNitException;
 import exceptions.WrongOptionException;
 import model.OrderSystemPrototype;
 
@@ -58,13 +56,14 @@ public class CustomerMenu {
 	}
 
 
-
-	private void registerCustomer() {
+	//DONE
+	private void registerCustomer() { 
 		String typeId;
 		String id = "";
 		String fullName;
 		String phone;
 		String address;
+		char ch='"';
 		System.out.println(" \nREGISTER CUSTOMER");
 		System.out.println("Plese insert the following data. \n");
 
@@ -84,74 +83,51 @@ public class CustomerMenu {
 		System.out.println("Customer's type id");
 		typeId = sc.nextLine();
 		System.out.println("Customer's fullname");
+		System.out.println(ch+"name"+ch+ " " +ch+"middle name"+ch + " " +ch+"last name"+ch);
 		fullName = sc.nextLine();
 		System.out.println("Customer's phone");
 		phone = sc.nextLine();
 		System.out.println("Customer's address");
 		address = sc.nextLine();
-		
+
 		osp.registerCustomer(typeId, id, fullName, phone, address);
+		System.out.println("Customer added...");
 	}
-	
-	
-	
+
 	private void updateCustomerData() {
-		String typeId;
 		String id;
+		String typeId;
 		String fullName;
 		String phone;
 		String address;
-
+		char ch='"';
 		System.out.println("\nUPDATE CUSTOMER DATA\n");
 		if (osp.getCustomers().size()>0) {
+			do {
+				System.out.println("Insert customer's id");
+				id = sc.nextLine();
+				if (osp.existingCustomerId(id)) {
+					System.out.println("id does not exist, please insert an existing one");
+				}				
+			} while (!osp.existingCustomerId(id));
+			System.out.println("Insert customer's typeId");
+			typeId = sc.nextLine();
+			System.out.println("Insert customer's fullname");
+			System.out.println(ch+"name"+ch+ " " +ch+"middle name"+ch + " " +ch+"last name"+ch );
+			fullName = sc.nextLine();
+			System.out.println("Insert customer's phone");
+			phone = sc.nextLine();
+			System.out.println("Insert customer's address");
+			address = sc.nextLine();
 
-			try {
-				do {
-					System.out.println("Insert customer's id");
-					id = sc.nextLine();
-					if (osp.existingCustomerId(id)) {
-						System.out.println("id does not exist, please insert an existing one");
-					}				
-				} while (!osp.existingCustomerId(id));
+			osp.registerCustomer(typeId, typeId, fullName, phone, address);
+			System.out.println("\n Updated customer data \n");
 
-				do {
-					System.out.println("Insert restaurant's new name");
-					name = sc.nextLine();
-					if (osp.existingRestaurantName(name)) {
-						throw new SameNameException();
-					}
-				} while (osp.existingRestaurantName(name));
-				do {
-					System.out.println("Insert the new restaurant's new nit");
-					nit2 = sc.nextLine();
-					if (osp.existingRestaurantNit(nit2)) {
-						throw new SameNitException();
-					}
-				} while (osp.existingRestaurantNit(nit2));
 
-				System.out.println("Insert admin's name");
-				nameA = sc.nextLine();
-
-				osp.updateResData(nit, name, nit2, nameA);
-			}catch (SameNameException sne) {
-				System.out.println(sne.getMessage());
-				updateRestaurantData();
-			}catch (SameNitException sne) {
-				System.out.println(sne.getMessage());
-				updateRestaurantData();
-			}
 		}else
 			System.out.println("Register at least one customer first");
-		
-		
-		
-		
-		
-		
-		
-		
-
 	}
+
 	private void listCustomers() {
 		if (osp.getCustomers().size() == 0) {
 			System.out.println("Register at least one Customer");
@@ -159,8 +135,24 @@ public class CustomerMenu {
 			System.out.println(osp.customersToString());
 		}
 	}	
-	private void findCustomer() {
 
+	private void findCustomer() {
+		String id;	
+		System.out.println("FIND CUSTOMER\n");
+
+
+		if (osp.getCustomers().size()>0) {
+			do {
+				System.out.println("Insert customer's id");	
+				id = sc.nextLine();
+				if (!osp.existingCustomerId(id)) {
+					System.out.println("There is no such id");	
+				}	
+			} while (!osp.existingCustomerId(id));
+			System.out.println(osp.getCustomerInfo(osp.findCustomer(id)));			
+		}else {
+			System.out.println("Register at least one customer");
+		}		
 	}
 	private void importCustomersData() {
 
@@ -176,7 +168,7 @@ public class CustomerMenu {
 
 		System.out.println("\nWELCOME TO CUSTOMER MODULE\n");
 		System.out.println("Please insert one option");
-		System.out.println("1. Register customer .");
+		System.out.println("1. Register customer.");
 		System.out.println("2. Update customer data.");
 		System.out.println("3. List customers on screen.");
 		System.out.println("4. Find customer.");

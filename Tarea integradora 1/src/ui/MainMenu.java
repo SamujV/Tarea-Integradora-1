@@ -69,7 +69,6 @@ public class MainMenu {
 				break;
 			case 6:
 				goodBye();
-				System.out.println(osp.getPrueba());
 				break;
 			default: throw new WrongOptionException();
 			}	

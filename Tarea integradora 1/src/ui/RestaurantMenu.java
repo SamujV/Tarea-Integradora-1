@@ -154,13 +154,13 @@ public class RestaurantMenu {
 			System.out.println(osp.restaurantsToString());
 		}
 	}	
-	private void importData() {// se congela cuando se introduce el file
+	private void importData() {
 		String fileName;
 		System.out.println("	IMPORT RESTAURANTS DATA");
 		try {
-			//System.out.println("Please insert path");
-			//fileName = sc.nextLine();
-			osp.importRestaurantsData(PATH);
+			System.out.println("Please insert path");
+			fileName = sc.nextLine();
+			osp.importRestaurantsData(fileName);
 			System.out.println("Data imported successfully");
 		}catch (IOException io) {
 			System.out.println("Unable to import data");

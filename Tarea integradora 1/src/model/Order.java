@@ -19,10 +19,53 @@ public class Order {
 	public Order(String idCust, String nitRest) {
 		this.idCust = idCust;
 		this.nitRest = nitRest;
-		status = OrderStatus.REQUESTED;
-		
+		status = OrderStatus.REQUESTED;		
 		code = UUID.randomUUID().toString();
 		generateDateTime();
+	}
+
+	public void generateDateTime() {
+
+		DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a ");
+		Date date = new Date();
+		currentTime  = dateFormat.format(date);
+		String strDateFormat = "dd-MMM-yyyy"; 
+		SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat); 
+		currentDate = objSDF.format(date);
+
+	}
+
+
+	public void setStatus(OrderStatus oStatus) {
+		status = oStatus;
+	}
+
+	public String getCurrentTime() {
+		return currentTime;
+	}
+
+	public void setCurrentTime(String currentTime) {
+		this.currentTime = currentTime;
+	}
+
+	public String getCurrentDate() {
+		return currentDate;
+	}
+
+	public void setCurrentDate(String currentDate) {
+		this.currentDate = currentDate;
+	}
+
+	public List<Product> getProductsToOrder() {
+		return productsToOrder;
+	}
+
+	public void setProductsToOrder(List<Product> productsToOrder) {
+		this.productsToOrder = productsToOrder;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getIdCust() {
@@ -48,21 +91,6 @@ public class Order {
 		return status;
 	}
 
-	public void generateDateTime() {
-
-		DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a ");
-		Date date = new Date();
-		currentTime  = dateFormat.format(date);
-		String strDateFormat = "dd-MMM-yyyy"; 
-		SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat); 
-		currentDate = objSDF.format(date);
-
-	}
-
-
-	public void setStatus(OrderStatus oStatus) {
-		status = oStatus;
-	}
 
 
 

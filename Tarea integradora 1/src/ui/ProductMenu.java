@@ -27,7 +27,6 @@ public class ProductMenu {
 		switch (option) {
 		case 1:
 			registrarProducto();
-			testearPrueba();
 			break;
 		case 2:
 			actualizarProducto();
@@ -44,12 +43,7 @@ public class ProductMenu {
 
 	}
 
-	private void testearPrueba() {
-		System.out.println("ingrese una linea");
-		String prueba = sc.nextLine();
-		osp.setPrueba(prueba);
 	
-	}
 
 
 
